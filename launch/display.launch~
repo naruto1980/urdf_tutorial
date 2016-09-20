@@ -1,0 +1,23 @@
+<launch>
+
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" />
+
+<!--
+  <arg name="model" default="$(find urdf_tutorial)/urdf/r2d2.xacro"/>
+  <arg name="urdfconfig" default="$(find urdf_tutorial)/urdf/01-myfirst.urdf" />
+  <arg name="urdfconfig" default="$(find urdf_tutorial)/urdf/02-multipleshapes.urdf" />
+  <arg name="urdfconfig" default="$(find urdf_tutorial)/urdf/03-origins.urdf" />
+  <param name="robot_description" textfile="$(arg urdfconfig)" />
+  <param name="robot_description" comand="$(find xacro)/xacro.py $(arg model)" />
+-->
+
+  <arg name="urdfconfig" default="$(find urdf_tutorial)/urdf/03-origins.urdf" />
+  <param name="robot_description" textfile="$(arg urdfconfig)" />
+  <param name="use_gui" value="$(arg gui)"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>
